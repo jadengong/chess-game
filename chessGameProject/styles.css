@@ -8,22 +8,47 @@
 .square {
     height: 40px;
     width: 40px;
+    position: relative; 
 }
 
 /* 
     any element that is a square with svg in it will have these properties
+    adding the positon and z-index so that ONLY the pieces are grabbed and not the square or anything else during the drag and drop events 
 */ 
 .square svg {
     height: 30px;
     width: 30px;
     margin: 5px;
+    position: relative;
+    z-index: -9; /* behind the square */
 }
+
+path {
+    position: relative;
+    z-index: -10; /* behind the square */
+}
+
+.piece {
+    position: relative;
+    z-index: 9; /* in front of square */
+}
+
+/*
+    for the colors, i want the board to be alternating green and white while the pieces are brown and black
+*/
 
 .green {
     background-color: rgb(51, 170, 107);
 }
 
 .white {
-    background-color: rgb(252, 252, 252);
+    fill: white;
 }
 
+.black{ /* svgs work with fill */
+    fill: black; 
+}
+
+.brown {
+    fill: rgb(143, 26, 26);
+}
