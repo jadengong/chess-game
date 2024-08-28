@@ -1,20 +1,29 @@
-#gameboard {
+#gameboard   {
     width: 320px;
     height: 320px;
-    background-color:black;
-
+    display: flex;
+    flex-wrap: wrap; 
 }
 
 .square {
-    height : 40px;
+    height: 40px;
     width: 40px;
 }
 
-.beige {
-    background-color: rgb(110, 110, 98);
+/* 
+    any element that is a square with svg in it will have these properties
+*/ 
+.square svg {
+    height: 30px;
+    width: 30px;
+    margin: 5px;
 }
 
-.brown {
-    background-color: brown;
+.green {
+    background-color: rgb(51, 170, 107);
+}
+
+.white {
+    background-color: rgb(252, 252, 252);
 }
 
