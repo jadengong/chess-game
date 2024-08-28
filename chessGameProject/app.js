@@ -7,6 +7,9 @@ const infoDisplay = document.querySelector("#info-display");
 
 const width = 8; // to define a 8x8 board below
 
+let playerGo = 'brown' // for the turn changing mechanic
+playerDisplay.textContent = 'brown'
+
 const startPieces = [ // think of an array of 64 items
     rook, knight, bishop, queen, king, bishop, knight, rook,
     pawn, pawn, pawn, pawn, pawn, pawn, pawn, pawn,
@@ -55,7 +58,7 @@ createBoard();
 
 
 
-const allSquares = document.querySelectorAll("#gameboard .square")
+const allSquares = document.querySelectorAll(".square")
 
 allSquares.forEach(square => {
     square.addEventListener('dragstart', dragStart) // square will be looking for a dragstart event, and when it starts a function dragStart will be called
@@ -81,11 +84,37 @@ function dragDrop(e){
 
     const taken = e.target.classList.contains('piece') // if target contains the class piece, then clearly its a piece
 
-    e.target.parentNode.append(draggedElement) // append the target element to square with a piece already in it, then remove it
-    e.target.remove() 
+   // e.target.parentNode.append(draggedElement) // append the target element to square with a piece already in it, then remove it
+   //  e.target.remove() 
 
     // now we have to make sure that this only happens if there is a piece, and if it is an opponents piece
 
+    changePlayer()
+
+}
+
+function changePlayer(){
+    if(playerGo === "brown"){
+        reverseIDs() // on brownad square 0 should be bottom left
+        playerGo = "black"
+        playerDisplay.textContent = "black"
+    } else {
+        revertIDs() // on black turn square 0 should be top left
+        playerGo = "brown"
+        playerDisplay.textContent = "brown"
+    }
 
 
+}
+
+// flip ids so that square 0 is in the perspective of the turngoer, like flipping the board
+
+function reverseIDs(){
+    const allSquares = document.querySelectorAll(".square")
+    allSquares.forEach((square, i) => square.setAttribute('square-id', (width * width - 1) - i)) // in this loop, the first iteration ends up being 8 * 8 - 1 - 0 = 63, then continuously subtract 1 to be 62, 61... this reverses the IDs
+}
+
+function revertIDs(){
+    const allSquares = document.querySelectorAll(".square") // freshest squares
+    allSquares.forEach((square, i) => square.setAttribute('square-id', i)) // setting it back to i reverts
 }
