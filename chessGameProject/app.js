@@ -7,7 +7,7 @@ const infoDisplay = document.querySelector("#info-display");
 
 const width = 8; // to define a 8x8 board below
 
-let playerGo = 'brown' // for the turn changing mechanic
+let playerGo = 'burlywood' // for the turn changing mechanic
 playerDisplay.textContent = 'brown'
 
 const startPieces = [ // think of an array of 64 items
@@ -38,13 +38,13 @@ function createBoard(){
         const row = Math.floor((63 - i) / 8) + 1 // define the row we are in, 8x8 board 
 
         if(row % 2 === 0){
-            square.classList.add(i % 2 === 0 ? "green" : "white")
+            square.classList.add(i % 2 === 0 ? "mapleBrown" : "mahoganyBrown")
         }else {
-            square.classList.add(i % 2 === 0 ? "white" : "green") // has to be if else so that at the end of a row, if a square ends on one color, the first square in the next row has to be the same color.
+            square.classList.add(i % 2 === 0 ? "mahoganyBrown" : "mapleBrown") // has to be if else so that at the end of a row, if a square ends on one color, the first square in the next row has to be the same color.
         }
 
         if(i <= 15){ // we want the first 16 squares to be black (team 1); enter the square, enter the child of the square, and make classList black. 
-            square.firstChild.firstChild.classList.add('brown')
+            square.firstChild.firstChild.classList.add('burlywood')
         }else if(i >= 48){
             square.firstChild.firstChild.classList.add('black')
         }
@@ -87,7 +87,7 @@ function dragDrop(e){
     const correctGo = draggedElement.firstChild.classList.contains(playerGo) // ensuring that the dragged element matches the playerGo (either black or brown)
     const taken = e.target.classList.contains('piece') // if target contains the class piece, then clearly its a piece
     const valid = checkIfValid(e.target) // pass to function that does the actual valid checker
-    const opponentGo = playerGo === 'brown' ? 'black' : 'brown' // if player is brown, we know opp is black, or vice versa
+    const opponentGo = playerGo === 'burlywood' ? 'black' : 'burlywood' // if player is brown (burlywood), we know opp is black, or vice versa
     const takenByOpponent = e.target.firstChild?.classList.contains(opponentGo)
 
     if(correctGo){ // if the correct player picks up the correct piece
@@ -216,22 +216,22 @@ function checkIfValid(target){ // a draggedElement attempting to go into an eith
                 || startId - width * 7 === targetId && !document.querySelector(`[square-id="${startId - width}"]`).firstChild && !document.querySelector(`[square-id="${startId - width * 2}"]`).firstChild && !document.querySelector(`[square-id="${startId - width * 3}"]`).firstChild && !document.querySelector(`[square-id="${startId - width * 4}"]`).firstChild && !document.querySelector(`[square-id="${startId - width * 5}"]`).firstChild && !document.querySelector(`[square-id="${startId - width * 6}"]`).firstChild
                 
                 // right
-                || startId + width === targetId 
-                || startId + width  === targetId && !document.querySelector(`[square-id="${startId + 1}"]`).firstChild
-                || startId + width  === targetId && !document.querySelector(`[square-id="${startId + 1}"]`).firstChild && !document.querySelector(`[square-id="${startId + 2}"]`).firstChild
-                || startId + width  === targetId && !document.querySelector(`[square-id="${startId + 1}"]`).firstChild && !document.querySelector(`[square-id="${startId + 2}"]`).firstChild && !document.querySelector(`[square-id="${startId + 3}"]`).firstChild
-                || startId + width  === targetId && !document.querySelector(`[square-id="${startId + 1}"]`).firstChild && !document.querySelector(`[square-id="${startId + 2}"]`).firstChild && !document.querySelector(`[square-id="${startId + 3}"]`).firstChild && !document.querySelector(`[square-id="${startId + 4}"]`).firstChild
-                || startId + width  === targetId && !document.querySelector(`[square-id="${startId + 1}"]`).firstChild && !document.querySelector(`[square-id="${startId + 2}"]`).firstChild && !document.querySelector(`[square-id="${startId + 3}"]`).firstChild && !document.querySelector(`[square-id="${startId + 4}"]`).firstChild && !document.querySelector(`[square-id="${startId + 5}"]`).firstChild
-                || startId + width  === targetId && !document.querySelector(`[square-id="${startId + 1}"]`).firstChild && !document.querySelector(`[square-id="${startId + 2}"]`).firstChild && !document.querySelector(`[square-id="${startId + 3}"]`).firstChild && !document.querySelector(`[square-id="${startId + 4}"]`).firstChild && !document.querySelector(`[square-id="${startId + 5}"]`).firstChild && !document.querySelector(`[square-id="${startId + 6}"]`).firstChild
+                || startId + 1 === targetId 
+                || startId + 2  === targetId && !document.querySelector(`[square-id="${startId + 1}"]`).firstChild
+                || startId + 3  === targetId && !document.querySelector(`[square-id="${startId + 1}"]`).firstChild && !document.querySelector(`[square-id="${startId + 2}"]`).firstChild
+                || startId + 4  === targetId && !document.querySelector(`[square-id="${startId + 1}"]`).firstChild && !document.querySelector(`[square-id="${startId + 2}"]`).firstChild && !document.querySelector(`[square-id="${startId + 3}"]`).firstChild
+                || startId + 5  === targetId && !document.querySelector(`[square-id="${startId + 1}"]`).firstChild && !document.querySelector(`[square-id="${startId + 2}"]`).firstChild && !document.querySelector(`[square-id="${startId + 3}"]`).firstChild && !document.querySelector(`[square-id="${startId + 4}"]`).firstChild
+                || startId + 6  === targetId && !document.querySelector(`[square-id="${startId + 1}"]`).firstChild && !document.querySelector(`[square-id="${startId + 2}"]`).firstChild && !document.querySelector(`[square-id="${startId + 3}"]`).firstChild && !document.querySelector(`[square-id="${startId + 4}"]`).firstChild && !document.querySelector(`[square-id="${startId + 5}"]`).firstChild
+                || startId + 7  === targetId && !document.querySelector(`[square-id="${startId + 1}"]`).firstChild && !document.querySelector(`[square-id="${startId + 2}"]`).firstChild && !document.querySelector(`[square-id="${startId + 3}"]`).firstChild && !document.querySelector(`[square-id="${startId + 4}"]`).firstChild && !document.querySelector(`[square-id="${startId + 5}"]`).firstChild && !document.querySelector(`[square-id="${startId + 6}"]`).firstChild
                 
                 // left
-                || startId - width === targetId 
-                || startId - width === targetId && !document.querySelector(`[square-id="${startId - 1}"]`).firstChild
-                || startId - width === targetId && !document.querySelector(`[square-id="${startId - 1}"]`).firstChild && !document.querySelector(`[square-id="${startId - 2}"]`).firstChild
-                || startId - width === targetId && !document.querySelector(`[square-id="${startId - 1}"]`).firstChild && !document.querySelector(`[square-id="${startId - 2}"]`).firstChild && !document.querySelector(`[square-id="${startId - 3}"]`).firstChild
-                || startId - width === targetId && !document.querySelector(`[square-id="${startId - 1}"]`).firstChild && !document.querySelector(`[square-id="${startId - 2}"]`).firstChild && !document.querySelector(`[square-id="${startId - 3}"]`).firstChild && !document.querySelector(`[square-id="${startId - 4}"]`).firstChild
-                || startId - width === targetId && !document.querySelector(`[square-id="${startId - 1}"]`).firstChild && !document.querySelector(`[square-id="${startId - 2}"]`).firstChild && !document.querySelector(`[square-id="${startId - 3}"]`).firstChild && !document.querySelector(`[square-id="${startId - 4}"]`).firstChild && !document.querySelector(`[square-id="${startId - 5}"]`).firstChild
-                || startId - width === targetId && !document.querySelector(`[square-id="${startId - 1}"]`).firstChild && !document.querySelector(`[square-id="${startId - 2}"]`).firstChild && !document.querySelector(`[square-id="${startId - 3}"]`).firstChild && !document.querySelector(`[square-id="${startId - 4}"]`).firstChild && !document.querySelector(`[square-id="${startId - 5}"]`).firstChild && !document.querySelector(`[square-id="${startId - 6}"]`).firstChild
+                || startId - 1 === targetId 
+                || startId - 2 === targetId && !document.querySelector(`[square-id="${startId - 1}"]`).firstChild
+                || startId - 3 === targetId && !document.querySelector(`[square-id="${startId - 1}"]`).firstChild && !document.querySelector(`[square-id="${startId - 2}"]`).firstChild
+                || startId - 4 === targetId && !document.querySelector(`[square-id="${startId - 1}"]`).firstChild && !document.querySelector(`[square-id="${startId - 2}"]`).firstChild && !document.querySelector(`[square-id="${startId - 3}"]`).firstChild
+                || startId - 5 === targetId && !document.querySelector(`[square-id="${startId - 1}"]`).firstChild && !document.querySelector(`[square-id="${startId - 2}"]`).firstChild && !document.querySelector(`[square-id="${startId - 3}"]`).firstChild && !document.querySelector(`[square-id="${startId - 4}"]`).firstChild
+                || startId - 6 === targetId && !document.querySelector(`[square-id="${startId - 1}"]`).firstChild && !document.querySelector(`[square-id="${startId - 2}"]`).firstChild && !document.querySelector(`[square-id="${startId - 3}"]`).firstChild && !document.querySelector(`[square-id="${startId - 4}"]`).firstChild && !document.querySelector(`[square-id="${startId - 5}"]`).firstChild
+                || startId - 7 === targetId && !document.querySelector(`[square-id="${startId - 1}"]`).firstChild && !document.querySelector(`[square-id="${startId - 2}"]`).firstChild && !document.querySelector(`[square-id="${startId - 3}"]`).firstChild && !document.querySelector(`[square-id="${startId - 4}"]`).firstChild && !document.querySelector(`[square-id="${startId - 5}"]`).firstChild && !document.querySelector(`[square-id="${startId - 6}"]`).firstChild
 
 
                ){
@@ -342,13 +342,13 @@ function checkIfValid(target){ // a draggedElement attempting to go into an eith
 }
 
 function changePlayer(){
-    if(playerGo === "brown"){
-        reverseIDs() // on brownad square 0 should be bottom left
+    if(playerGo === "burlywood"){
+        reverseIDs() // on brown square 0 should be bottom left
         playerGo = "black"
         playerDisplay.textContent = "black"
     } else {
         revertIDs() // on black turn square 0 should be top left
-        playerGo = "brown"
+        playerGo = "burlywood"
         playerDisplay.textContent = "brown"
     }
 
@@ -375,13 +375,13 @@ function checkWin(){
         allSquares.forEach(square => square.firstChild?.setAttribute('draggable',false)) // to make the pieces no longer draggable after game end
     }
 
-    if(!kings.some(king => king.firstChild.classList.contains('brown'))){ 
+    if(!kings.some(king => king.firstChild.classList.contains('burlywood'))){ 
         infoDisplay.innerHTML = "Black wins."
         const allSquares = document.querySelectorAll('.square')
         allSquares.forEach(square => square.firstChild?.setAttribute('draggable',false))
     }
 
 
-    }
+
 
 }

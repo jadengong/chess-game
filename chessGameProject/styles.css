@@ -35,20 +35,22 @@ path {
 
 /*
     for the colors, i want the board to be alternating green and white while the pieces are brown and black
+
+    update 8/30/24: ive changed my mind for it to be maple brown and like mahogany brown && the pieces to be black and brownish (burlywood)
 */
 
-.green {
-    background-color: rgb(51, 170, 107);
+.mapleBrown {
+    background-color: rgb(102, 51, 0);
 }
 
-.white {
-    fill: white;
+.mahoganyBrown {
+    background-color: rgb(255, 233, 197)
 }
 
 .black{ /* svgs work with fill */
     fill: black; 
 }
 
-.brown {
-    fill: rgb(143, 26, 26);
+.burlywood {
+    fill: burlywood
 }
