@@ -95,6 +95,7 @@ function dragDrop(e){
         if(takenByOpponent && valid){ // replace element if dragged element is over a square with a piece (firstChild) and is of the other player type and is a valid rule in chess
             e.target.parentNode.append(draggedElement) // append the target element to square with a piece already in it, then remove it
             e.target.remove() 
+            checkWin()
             changePlayer()
             return
         }else if(taken && !takenByOpponent){ // empty spot, do nothing
@@ -103,6 +104,7 @@ function dragDrop(e){
             return 
         }else if(valid){
             e.target.append(draggedElement)
+            checkWin()
             changePlayer()
             return 
         }
@@ -363,4 +365,23 @@ function reverseIDs(){
 function revertIDs(){
     const allSquares = document.querySelectorAll(".square") // freshest squares
     allSquares.forEach((square, i) => square.setAttribute('square-id', i)) // setting it back to i reverts
+}
+
+function checkWin(){
+    const kings = Array.from(document.querySelectorAll('#king')) // to use sum, we need to put this in an array
+    if(!kings.some(king => king.firstChild.classList.contains('black'))){ // at this point, there is suddenly no brown king, therefore black wins
+        infoDisplay.innerHTML = "Brown wins."
+        const allSquares = document.querySelectorAll('.square')
+        allSquares.forEach(square => square.firstChild?.setAttribute('draggable',false)) // to make the pieces no longer draggable after game end
+    }
+
+    if(!kings.some(king => king.firstChild.classList.contains('brown'))){ 
+        infoDisplay.innerHTML = "Black wins."
+        const allSquares = document.querySelectorAll('.square')
+        allSquares.forEach(square => square.firstChild?.setAttribute('draggable',false))
+    }
+
+
+    }
+
 }
